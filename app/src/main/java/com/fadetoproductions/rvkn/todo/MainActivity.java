@@ -2,6 +2,7 @@ package com.fadetoproductions.rvkn.todo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EditTodoFragment.EditTodoDialogListener {
 
     private final int EDIT_REQUEST_CODE = 20;
     private final int EDIT_SUCCESS_CODE = 200;
@@ -84,13 +86,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
                         String item = items.get(pos);
-                        launchEditActivity(item, pos);
+                        showEditDialog();
+//                        launchEditActivity(item, pos);
                     }
                 }
         );
     }
 
-    // Edit related stuff
+    // Launches the edit activity
     public void launchEditActivity(String item, int pos) {
         Intent launchEditActivity = new Intent(MainActivity.this, EditItemActivity.class);
         launchEditActivity.putExtra("item", item);
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(launchEditActivity, EDIT_REQUEST_CODE);
     }
 
+    // This is called when another activity finishes.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EDIT_REQUEST_CODE && resultCode == EDIT_SUCCESS_CODE) {
@@ -110,6 +114,26 @@ public class MainActivity extends AppCompatActivity {
             // There really shouldn't be anything else in the app
         }
     }
+
+    // This is the delegate method called when the dialogue is done
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        Toast.makeText(this, "Hi, " + inputText, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        EditTodoFragment editNameDialogFragment = EditTodoFragment.newInstance("Edit Todo Item");
+        editNameDialogFragment.show(fm, "fragment_edit_todo");
+    }
+
+
 
     public void populateArrayItems() {
         readItems();
