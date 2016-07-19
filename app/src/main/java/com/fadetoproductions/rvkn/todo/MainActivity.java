@@ -3,17 +3,23 @@ package com.fadetoproductions.rvkn.todo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
+
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +42,31 @@ public class MainActivity extends AppCompatActivity {
         lvItems.setAdapter(aToDoAdapter);
         etEditText = (EditText) findViewById(R.id.etEditText);
         setupListeners();
+
+
+        Log.d("db", "setting up db");
+
+        setupDatabase();
+
+        Log.d("db", "creating todo");
+
+        Todo newTodo = new Todo();
+        newTodo.name = "some neweeeeeer name";
+        newTodo.dueDate = new Date();
+        newTodo.priority = 1;
+        newTodo.save();
+
+        List<Todo> todos = Todo.getAll();
+
+        for (int i = 0; i < todos.size(); i++) {
+            Log.d("db", todos.get(i).name);
+        }
+    }
+
+
+    private void setupDatabase() {
+        Configuration dbConfiguration = new Configuration.Builder(this).setDatabaseName("todos_table.db").create();
+        ActiveAndroid.initialize(dbConfiguration);
     }
 
     private void setupListeners() {
@@ -82,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void populateArrayItems() {
         readItems();
-        aToDoAdapter = new ArrayAdapter<String>(this, R.layout.todo_list_item, items);
+        aToDoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+//        aToDoAdapter = new ArrayAdapter<String>(this, R.layout.todo_list_item, items);
     }
 
     public void onAddItem(View view) {
