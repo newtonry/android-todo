@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ToDoItemAdapter extends ArrayAdapter<Todo> {
+public class TodoAdapter extends ArrayAdapter<Todo> {
 
-    public ToDoItemAdapter(Context context, ArrayList<Todo> todos) {
+    public TodoAdapter(Context context, List<Todo> todos) {
         super(context, 0, todos);
     }
 
@@ -31,7 +31,7 @@ public class ToDoItemAdapter extends ArrayAdapter<Todo> {
         }
 
         // Lookup view for data population
-        TextView tvTodoName = (TextView) convertView.findViewById(R.id.tvTodoItemName);
+        TextView tvTodoName = (TextView) convertView.findViewById(R.id.tvTodoName);
         // Populate the data into the template view using the data object
         tvTodoName.setText(todo.name);
 
