@@ -11,11 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.Date;
 
 
 public class EditTodoFragment extends DialogFragment {
 
     private Button btnSave;
+    private EditText etTodoName;
 
 
     public EditTodoFragment() {
@@ -26,13 +30,16 @@ public class EditTodoFragment extends DialogFragment {
 
     // 1. Defines the listener interface with a method passing back data result.
     public interface EditTodoDialogListener {
-        void onFinishEditDialog(String inputText);
+        void onFinishEditDialog(String newName, Date newDueDate, int newPriority);
     }
 
-    public static EditTodoFragment newInstance(String title) {
+    public static EditTodoFragment newInstance(int id, String name, Date dueDate, int priority) {
         EditTodoFragment frag = new EditTodoFragment();
         Bundle args = new Bundle();
-        args.putString("title", title);
+        args.putString("name", name);
+        args.putInt("id", id);
+        args.putInt("priority", priority);
+        // TODO putDate?
         frag.setArguments(args);
         return frag;
     }
@@ -53,12 +60,19 @@ public class EditTodoFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         btnSave = (Button) view.findViewById(R.id.btnSave);
+        etTodoName = (EditText) view.findViewById(R.id.etTodoName);
+
+        populateFields();
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
-                listener.onFinishEditDialog("YAY IM DONE");
+                listener.onFinishEditDialog(
+                        etTodoName.getText().toString(),
+                        new Date(),
+                        1
+                );
                 dismiss();
             }
         });
@@ -72,5 +86,8 @@ public class EditTodoFragment extends DialogFragment {
 //                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 
+    private void populateFields() {
+        etTodoName.setText(getArguments().getString("name", ""));
+    }
 
 }
