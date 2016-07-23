@@ -19,20 +19,18 @@ public class Todo extends Model {
     @Column(name = "DueDate")
 
     public Date dueDate;
-    @Column(name = "Priority")
-    public Integer priority;
 
+    @Column(name = "Priority")
+    public String priority;
 
     public Todo() {
         super();
     }
 
+
     public static List<Todo> getAll() {
-        // This is how you execute a query
         return new Select()
                 .from(Todo.class)
                 .execute();
     }
-
-
 }

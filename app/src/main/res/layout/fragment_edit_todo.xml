@@ -20,11 +20,11 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10" />
-    <EditText
-        android:id="@+id/txt_task_priority"
-        android:layout_width="173dp"  android:layout_height="wrap_content"
-        android:inputType="text"
-        android:imeOptions="actionDone" />
+    <Spinner
+        android:id="@+id/spnnrTaskPriority"
+        android:entries="@array/priorities_array"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

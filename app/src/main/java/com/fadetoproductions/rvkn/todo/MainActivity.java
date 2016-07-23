@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
 
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements EditTodoFragment.EditTodoDialogListener {
@@ -68,13 +67,16 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
 
     // This is the delegate method called when the dialogue is done
     @Override
-    public void onFinishEditDialog(String newName, Date newDueDate, int newPriority) {
-        Toast.makeText(this, "Hi, " + newName, Toast.LENGTH_SHORT).show();
+    public void onFinishEditDialog(Boolean didSave) {
+        if (didSave) {
+            Toast.makeText(this, "Your changes have been saved", Toast.LENGTH_SHORT).show();
+            aTodoAdapter.notifyDataSetChanged();
+        }
     }
 
     private void showEditDialog(Todo todo) {
         FragmentManager fm = getSupportFragmentManager();
-        EditTodoFragment editNameDialogFragment = EditTodoFragment.newInstance(1, todo.name, todo.dueDate, todo.priority);
+        EditTodoFragment editNameDialogFragment = EditTodoFragment.newInstance(todo);
         editNameDialogFragment.show(fm, "fragment_edit_todo");
     }
 
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
         Todo newTodo = new Todo();
         newTodo.name = newTodoName;
 //        newTodo.dueDate = new Date();
-        newTodo.priority = 1;
+        newTodo.priority = "Normal";
         newTodo.save();
 
         etEditText.setText("");
