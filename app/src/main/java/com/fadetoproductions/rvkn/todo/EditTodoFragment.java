@@ -91,6 +91,7 @@ public class EditTodoFragment extends DialogFragment {
 
 
         // Setup the dropdown spinner
+        // Is there a better way to do this? Seems kind of fragile
         List<String> prioritiesArray = Arrays.asList(getResources().getStringArray(R.array.priorities_array));
         int indexOfOption = prioritiesArray.indexOf(todo.priority);
         spnnrTaskPriority.setSelection(indexOfOption);

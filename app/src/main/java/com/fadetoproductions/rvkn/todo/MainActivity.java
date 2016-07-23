@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Configuration;
 
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements EditTodoFragment.EditTodoDialogListener {
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
 
         Todo newTodo = new Todo();
         newTodo.name = newTodoName;
-//        newTodo.dueDate = new Date();
+        newTodo.dueDate = new Date();
         newTodo.priority = "Normal";
         newTodo.save();
 
