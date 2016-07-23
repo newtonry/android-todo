@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
         populateArrayItems();
@@ -33,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(aTodoAdapter);
         etEditText = (EditText) findViewById(R.id.etEditText);
+
+
+
+
         setupListeners();
         setupDatabase();
     }

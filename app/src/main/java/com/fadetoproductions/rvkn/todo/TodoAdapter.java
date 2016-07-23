@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class TodoAdapter extends ArrayAdapter<Todo> {
@@ -30,10 +31,15 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.todo_list_item, parent, false);
         }
 
-        // Lookup view for data population
         TextView tvTodoName = (TextView) convertView.findViewById(R.id.tvTodoName);
-        // Populate the data into the template view using the data object
+        TextView tvPriority = (TextView) convertView.findViewById(R.id.tvPriority);
+        TextView dueDate = (TextView) convertView.findViewById(R.id.tvDueDate);
+
         tvTodoName.setText(todo.name);
+        tvPriority.setText(todo.priority);
+
+        String dueDateString = new SimpleDateFormat("EEE, MMM d" ).format(todo.dueDate);
+        dueDate.setText(dueDateString);
 
         return convertView;
     }
