@@ -4,12 +4,15 @@ package com.fadetoproductions.rvkn.todo;
  * Created by rnewton on 7/19/16.
  */
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -57,6 +60,10 @@ public class EditTodoFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         btnSave = (Button) view.findViewById(R.id.btnSave);
         etTodoName = (EditText) view.findViewById(R.id.etTodoName);
         spnnrTaskPriority = (Spinner) view.findViewById(R.id.spnnrTaskPriority);

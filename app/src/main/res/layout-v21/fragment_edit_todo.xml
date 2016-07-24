@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:background="#88000000"
+    >
     <EditText
+        style="@style/EditTextTheme"
         android:id="@+id/etTodoName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,27 +24,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        android:popupBackground="@color/colorButtonBackgroundGray"
+        android:backgroundTint="@color/colorTerminalGreen"
+        />
 
     <DatePicker
         android:id="@+id/dpDueDate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="75dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:datePickerMode="spinner"
-        android:calendarViewShown="false"
+        android:calendarTextColor="@color/colorTerminalGreen"
+        android:yearListSelectorColor="@color/colorTerminalGreen"
         />
     <Button
+        style="@style/ButtonTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:id="@+id/btnSave"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBottom="@+id/dpDueDate"
+        />
 
 </RelativeLayout>

@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorTerminalGreen">#97F842</color>
+    <color name="colorTerminalRed">#A94527</color>
+    <color name="colorTerminalBlue">#72B8C6</color>
     <color name="colorTerminalGreenSlightlyDark">#5A9427</color>
     <color name="colorActionBarGreen">#2D4A13</color>
     <color name="colorBlack">#000000</color>

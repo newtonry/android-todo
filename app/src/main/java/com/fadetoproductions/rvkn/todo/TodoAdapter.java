@@ -6,6 +6,7 @@
 package com.fadetoproductions.rvkn.todo;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -40,6 +41,8 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
 
         tvTodoName.setText(todo.name);
         tvPriority.setText(todo.priority);
+        tvPriority.setTextColor(getPriorityColor(todo));
+
 
         String dueDateString = new SimpleDateFormat("EEE, MMM d" ).format(todo.dueDate);
         dueDate.setText(dueDateString);
@@ -47,6 +50,21 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
         setOnTouchFadeOutListenerOnView(convertView);
         return convertView;
     }
+
+    private int getPriorityColor(Todo todo) {
+
+        switch(todo.priority) {
+            // This is dumb... should be able to pull these from R.colors instead
+            case "High":
+                return Color.parseColor("#A94527");
+            case "Normal":
+                return Color.parseColor("#72B8C6");
+            case "Low":
+                return Color.parseColor("#97F842");
+        }
+        return 0;  // Should never reach this
+    }
+
 
     private void setOnTouchFadeOutListenerOnView(View view) {
         final Animation fadeOut = new AlphaAnimation(1, 0);

@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -8,18 +7,24 @@
         <item name="colorAccent">@color/colorTerminalGreen</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:textColor">@color/colorTerminalGreen</item>
-        <item name="android:background">@color/colorBlack</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:textColorHint">@color/colorTerminalGreenSlightlyDark</item>
     </style>
 
     <style name="EditTextTheme">
         <item name="android:textColorHint">@color/colorTerminalGreenSlightlyDark</item>
         <item name="android:textColor">@color/colorTerminalGreen</item>
+        <item name="colorAccent">@color/colorTerminalGreen</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="DatePickerTheme">
+        <item name="android:textColorPrimary">@color/colorTerminalGreen</item>
+        <item name="android:textColor">@color/colorTerminalGreen</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="ButtonTheme">
         <item name="android:background">@color/colorButtonBackgroundGray</item>
     </style>
-
-
 </resources>
