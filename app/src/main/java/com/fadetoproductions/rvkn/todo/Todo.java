@@ -27,6 +27,12 @@ public class Todo extends Model {
         super();
     }
 
+    public Todo(String name, Date dueDate, String priority) {
+        super();
+        this.name = name;
+        this.dueDate = dueDate;
+        this.priority = priority;
+    }
 
     public static List<Todo> getAll() {
         return new Select()

@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
     ListView lvItems;
     EditText etEditText;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
         setupDatabase();
     }
 
-
     private void setupDatabase() {
         Configuration dbConfiguration = new Configuration.Builder(this).setDatabaseName("todos_table.db").create();
         ActiveAndroid.initialize(dbConfiguration);
@@ -45,10 +43,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Todo todo = todos.get(position);
-                todo.delete();
-                todos.remove(position);
-                aTodoAdapter.notifyDataSetChanged();
+                deleteTodoAtPosition(position);
                 view.clearAnimation();
                 return true;
             }
@@ -69,9 +64,17 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
     @Override
     public void onFinishEditDialog(Boolean didSave) {
         if (didSave) {
-            Toast.makeText(this, "Your changes have been saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.changes_were_saved, Toast.LENGTH_SHORT).show();
             aTodoAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void deleteTodoAtPosition(int position) {
+        Todo todo = todos.get(position);
+        todo.delete();
+        todos.remove(position);
+        aTodoAdapter.notifyDataSetChanged();
+        Toast.makeText(this, R.string.completed_text, Toast.LENGTH_SHORT).show();
     }
 
     private void showEditDialog(Todo todo) {
@@ -88,14 +91,16 @@ public class MainActivity extends AppCompatActivity implements EditTodoFragment.
     public void onAddItem(View view) {
         String newTodoName = etEditText.getText().toString();
 
-        Todo newTodo = new Todo();
+        if (newTodoName.equals("")) {
+            Toast.makeText(this, R.string.need_task_name, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Todo newTodo = new Todo(newTodoName, new Date(), "Normal");
         newTodo.name = newTodoName;
-        newTodo.dueDate = new Date();
-        newTodo.priority = "Normal";
         newTodo.save();
 
         etEditText.setText("");
-
         aTodoAdapter.add(newTodo);
         aTodoAdapter.notifyDataSetChanged();
     }

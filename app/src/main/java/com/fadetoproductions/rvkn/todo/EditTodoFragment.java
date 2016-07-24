@@ -116,8 +116,5 @@ public class EditTodoFragment extends DialogFragment {
         List<String> prioritiesArray = Arrays.asList(getResources().getStringArray(R.array.priorities_array));
         int indexOfOption = prioritiesArray.indexOf(todo.priority);
         spnnrTaskPriority.setSelection(indexOfOption);
-
-
     }
-
 }

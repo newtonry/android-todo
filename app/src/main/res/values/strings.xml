@@ -7,4 +7,7 @@
     <string name="name">Name</string>
     <string name="due_date">Due Date</string>
     <string name="cancel">Cancel</string>
+    <string name="changes_were_saved">Your changes have been saved</string>
+    <string name="completed_text">The task has been completed!</string>
+    <string name="need_task_name">You need a task name...</string>
 </resources>

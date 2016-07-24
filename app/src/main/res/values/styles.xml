@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorActionBarGreen</item>
+        <item name="colorPrimaryDark">@color/colorTerminalGreen</item>
         <item name="colorAccent">@color/colorTerminalGreen</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:textColor">@color/colorTerminalGreen</item>
@@ -15,7 +15,6 @@
         <item name="android:textColorHint">@color/colorTerminalGreenSlightlyDark</item>
         <item name="android:textColor">@color/colorTerminalGreen</item>
         <item name="colorAccent">@color/colorTerminalGreen</item>
-        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="DatePickerTheme">
