@@ -50,7 +50,7 @@ public class TodoAdapter extends ArrayAdapter<Todo> {
 
     private void setOnTouchFadeOutListenerOnView(View view) {
         final Animation fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setDuration(1100);
+        fadeOut.setDuration(1000);  // TODO set this to the default longpress time
 
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override

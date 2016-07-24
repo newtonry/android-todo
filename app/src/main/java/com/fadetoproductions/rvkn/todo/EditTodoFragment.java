@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -24,6 +26,7 @@ public class EditTodoFragment extends DialogFragment {
     private Button btnSave;
     private EditText etTodoName;
     private Spinner spnnrTaskPriority;
+    private DatePicker dpDueDate;
     public Todo todo;
 
 
@@ -57,6 +60,7 @@ public class EditTodoFragment extends DialogFragment {
         btnSave = (Button) view.findViewById(R.id.btnSave);
         etTodoName = (EditText) view.findViewById(R.id.etTodoName);
         spnnrTaskPriority = (Spinner) view.findViewById(R.id.spnnrTaskPriority);
+        dpDueDate = (DatePicker) view.findViewById(R.id.dpDueDate);
 
         populateFields();
 
@@ -79,6 +83,14 @@ public class EditTodoFragment extends DialogFragment {
     private void getCurrentValuesAndSaveTodo() {
         todo.name = etTodoName.getText().toString();
         todo.priority = spnnrTaskPriority.getSelectedItem().toString();
+
+        int year = dpDueDate.getYear();
+        int month = dpDueDate.getMonth();
+        int day = dpDueDate.getDayOfMonth();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        todo.dueDate = calendar.getTime();
+
         todo.save();
     }
 
@@ -87,8 +99,10 @@ public class EditTodoFragment extends DialogFragment {
         etTodoName.setText(todo.name);
 
         // Setup the due date
-        // Some dueDate Stuff
-
+        // Is there a better way to do all this date stuff? Seems overly complex to pass data between a Date, Calendar, and DatePicker
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todo.dueDate);
+        dpDueDate.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         // Setup the dropdown spinner
         // Is there a better way to do this? Seems kind of fragile
